@@ -1,5 +1,6 @@
 site_name: JustTweenIt
 nav:
-    - Home: index.md
+    - Overview: index.md
+    - Configure Tween In Editor: ConfigureTweenInEditor.md
     - About: about.md
 theme: readthedocs
