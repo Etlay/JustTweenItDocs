@@ -5,6 +5,7 @@ nav:
     - BuiltIn animations: BuiltInAnimations.md
     - Create user custom animations: CreateUserCustomAnimation.md
     - Unit Tests: UnitTests.md
+copyright: Copyright © 2020 - 2020 Aleksey Diudia
 theme:
   name: material
   palette:
