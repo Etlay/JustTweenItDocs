@@ -1,6 +1,12 @@
 site_name: JustTweenIt
 nav:
     - Overview: index.md
-    - Configure Tween In Editor: ConfigureTweenInEditor.md
-    - About: about.md
-theme: readthedocs
+    - Basic concepts: BasicConcepts.md
+    - BuiltIn animations: BuiltInAnimations.md
+    - Create user custom animations: CreateUserCustomAnimation.md
+    - Unit Tests: UnitTests.md
+theme:
+  name: readthedocs
+markdown_extensions:
+  - codehilite:
+      linenums: true
