@@ -4,20 +4,26 @@
 In JustTweenIt each tween is represented as a sequence of animations.
 To create a tween you should create a sequence on target entity and add animations to it:
 
-<pre><code>var moveSequence = entity.AddSequence(dstManager);
+``` c#
+var moveSequence = entity.AddSequence(dstManager);
 moveSequence.Move(dstManager, new float3(0, 5, 0), 1f);
 moveSequence.Move(dstManager, new float3(0, 0, 5), 1f);
 moveSequence.Move(dstManager, new float3(0, -5, 0), 1f);
-moveSequence.Move(dstManager, new float3(0, 0, -5), 1f);</code></pre>
+moveSequence.Move(dstManager, new float3(0, 0, -5), 1f);
+```
 
 You can start, pause and stop playing sequence:
-<pre><code>moveSequence.Play(dstManager);
+``` c#
+moveSequence.Play(dstManager);
 moveSequence.Pause(dstManager);
 moveSequence.Stop(dstManager);
-moveSequence.DestroySequence(dstManager);</code></pre>
+moveSequence.DestroySequence(dstManager);
+```
 
 Also you can setup sequence loop count and type:
-<pre><code>moveSequence.SetLoop(dstManager, JTweenSequenceLoopType.PinPong, -1);</code></pre>
+``` c#
+moveSequence.SetLoop(dstManager, JTweenSequenceLoopType.PinPong, -1);
+```
 
 JustTweenIt supports 3 types of loops:
 

@@ -6,7 +6,17 @@ nav:
     - Create user custom animations: CreateUserCustomAnimation.md
     - Unit Tests: UnitTests.md
 theme:
-  name: readthedocs
+  name: material
+  palette:
+    scheme: slate
+    primary: amber
+    accent: indigo
 markdown_extensions:
+  - pymdownx.tabbed
+  - pymdownx.superfences
+  - admonition
   - codehilite:
+      guess_lang: false
       linenums: true
+  - toc:
+      permalink: true
