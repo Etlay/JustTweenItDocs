@@ -1,0 +1,635 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+    
+    
+      
+        <title>Basic concepts - JustTweenIt</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fe0cca5b.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a46bcfb3.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ffc107">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#basic-concepts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="JustTweenIt" class="md-header-nav__button md-logo" aria-label="JustTweenIt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            JustTweenIt
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Basic concepts
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="JustTweenIt" class="md-nav__button md-logo" aria-label="JustTweenIt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    JustTweenIt
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Basic concepts
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Basic concepts" class="md-nav__link md-nav__link--active">
+      Basic concepts
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jtweensequence" class="md-nav__link">
+    JTweenSequence
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jtweenanimation" class="md-nav__link">
+    JTweenAnimation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jtween-system-groups" class="md-nav__link">
+    JTween System Groups
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-tween-in-the-editor" class="md-nav__link">
+    Configure Tween In the Editor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-and-run-tweens-from-the-main-thread" class="md-nav__link">
+    Create and run tweens from the main thread
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-and-run-tweens-from-the-job-system" class="md-nav__link">
+    Create and run tweens from the job system
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-sequence-callbacks" class="md-nav__link">
+    Process sequence callbacks
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../BuiltInAnimations/" title="BuiltIn animations" class="md-nav__link">
+      BuiltIn animations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../CreateUserCustomAnimation/" title="Create user custom animations" class="md-nav__link">
+      Create user custom animations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../UnitTests/" title="Unit Tests" class="md-nav__link">
+      Unit Tests
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jtweensequence" class="md-nav__link">
+    JTweenSequence
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jtweenanimation" class="md-nav__link">
+    JTweenAnimation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jtween-system-groups" class="md-nav__link">
+    JTween System Groups
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-tween-in-the-editor" class="md-nav__link">
+    Configure Tween In the Editor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-and-run-tweens-from-the-main-thread" class="md-nav__link">
+    Create and run tweens from the main thread
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-and-run-tweens-from-the-job-system" class="md-nav__link">
+    Create and run tweens from the job system
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-sequence-callbacks" class="md-nav__link">
+    Process sequence callbacks
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="basic-concepts">Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permanent link">&para;</a></h1>
+<h2 id="jtweensequence">JTweenSequence<a class="headerlink" href="#jtweensequence" title="Permanent link">&para;</a></h2>
+<p>In JustTweenIt each tween is represented as a sequence of animations.
+To create a tween you should create a sequence on target entity and add animations to it:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span> <span class="n">moveSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+<span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+<span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+<span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+<span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="m">5</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+</code></pre></div>
+
+<p>You can start, pause and stop playing sequence:
+<div class="highlight"><pre><span></span><code><span class="n">moveSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+<span class="n">moveSequence</span><span class="p">.</span><span class="n">Pause</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+<span class="n">moveSequence</span><span class="p">.</span><span class="n">Stop</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+<span class="n">moveSequence</span><span class="p">.</span><span class="n">DestroySequence</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+</code></pre></div></p>
+<p>Also you can setup sequence loop count and type:
+<div class="highlight"><pre><span></span><code><span class="n">moveSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">PinPong</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+</code></pre></div></p>
+<p>JustTweenIt supports 3 types of loops:</p>
+<ul>
+<li>Loop;</li>
+<li>LoopReverse;</li>
+<li>PinPong;</li>
+</ul>
+<h2 id="jtweenanimation">JTweenAnimation<a class="headerlink" href="#jtweenanimation" title="Permanent link">&para;</a></h2>
+<p>JTweenAnimation is a smallest peace of tween sequence.</p>
+<p>JustTweenIt provides several default animation implementations along with
+supporting custom user animations;</p>
+<p>In package you can find animations for:</p>
+<ul>
+<li>Transforms:<ul>
+<li>Move;</li>
+<li>Rotate;</li>
+<li>Scale;</li>
+<li>Shake;</li>
+</ul>
+</li>
+<li>Colors:<ul>
+<li>Lerp;</li>
+<li>Gradients;</li>
+</ul>
+</li>
+</ul>
+<h2 id="jtween-system-groups">JTween System Groups<a class="headerlink" href="#jtween-system-groups" title="Permanent link">&para;</a></h2>
+<p>JTween providers serveral system groups to user custom animations, such as:</p>
+<ul>
+<li><strong>JTweenSystemGroup</strong> - is a main group of the JustTweenIt plugin. All systems and system groups executed in this system group.
+  This system group executes in the Unity default SimulationSystemGroup;</li>
+<li><strong>JTweenInitAnimationsSystemGroup</strong> - this groups contains systems for initialization animations before playing such as caching previous object position or randomizing shake.</li>
+<li><strong>JTweenUpdateAnimationsSystemGroup</strong> - this group contains systems with logic for updating animations, such as moving and rotation objects.</li>
+<li><strong>JTweenFinishAnimationSystemGroup</strong> - in this group can be made additional logic after finishing animation and before starting next animation in sequence.</li>
+</ul>
+<h2 id="configure-tween-in-the-editor">Configure Tween In the Editor<a class="headerlink" href="#configure-tween-in-the-editor" title="Permanent link">&para;</a></h2>
+<p>The easiest way way to create tween is to setup it in the Inspector.
+To do it, you should add <strong>JTweenSequenceAuthoring</strong> component on Game Object.
+After that you can add animations to the sequence in the Inspector menu.</p>
+<p>In plugin provided examples, scene 1: <strong>Example 1 - Configue tween from authoring components</strong>  shows
+how to configure tweens in the scene.</p>
+<p><img alt="Screenshot" src="../img/EdiorInspector.png" /></p>
+<h2 id="create-and-run-tweens-from-the-main-thread">Create and run tweens from the main thread<a class="headerlink" href="#create-and-run-tweens-from-the-main-thread" title="Permanent link">&para;</a></h2>
+<p>JustTweenIt creates sequence and animations in the main thread.
+In plugin provided examples, scene 2: <strong>Example 2 - Run tween from code in monobehavior</strong>  shows how to create tween during conversion state.</p>
+<p>To create a sequence you should call <code>AddSequences(EntityManager entityManager)</code> method on an entity you want animate.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">class</span> <span class="nc">ExampleRunTweenFromMonobehavior</span> <span class="p">:</span> <span class="n">MonoBehaviour</span><span class="p">,</span> <span class="n">IConvertGameObjectToEntity</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Convert</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">dstManager</span><span class="p">,</span> <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">rotateSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+        <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="m">0.25f</span><span class="p">);</span>
+        <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="m">0.25f</span><span class="p">);</span>
+        <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="m">0.25f</span><span class="p">);</span>
+        <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="m">0.25f</span><span class="p">);</span>
+        <span class="n">rotateSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">Loop</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+        <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+
+        <span class="kt">var</span> <span class="n">moveSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+        <span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+        <span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+        <span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+        <span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="m">5</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+        <span class="n">moveSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">PinPong</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+        <span class="n">moveSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+
+        <span class="kt">var</span> <span class="n">scaleSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+        <span class="n">scaleSequence</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0.5f</span><span class="p">,</span><span class="m">0.5f</span><span class="p">,</span><span class="m">0.5f</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+        <span class="n">scaleSequence</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(-</span><span class="m">0.5f</span><span class="p">,-</span><span class="m">0.5f</span><span class="p">,-</span><span class="m">0.5f</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+        <span class="n">scaleSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">Loop</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+        <span class="n">scaleSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+
+        <span class="kt">var</span> <span class="n">colorSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+        <span class="n">colorSequence</span><span class="p">.</span><span class="n">BaseColorTo</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span><span class="k">new</span> <span class="n">float4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="m">1f</span> <span class="p">);</span>
+        <span class="n">colorSequence</span><span class="p">.</span><span class="n">BaseColorTo</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="m">1f</span> <span class="p">);</span>
+        <span class="n">colorSequence</span><span class="p">.</span><span class="n">BaseColorTo</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float4</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="m">1f</span> <span class="p">);</span>
+        <span class="n">colorSequence</span><span class="p">.</span><span class="n">BaseColorTo</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="k">new</span> <span class="n">float4</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="m">1f</span> <span class="p">);</span>
+        <span class="n">colorSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">Loop</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+        <span class="n">colorSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">dstManager</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="create-and-run-tweens-from-the-job-system">Create and run tweens from the job system<a class="headerlink" href="#create-and-run-tweens-from-the-job-system" title="Permanent link">&para;</a></h2>
+<p>JustTweenIt also supports creating tweens in job system in parallel way.
+You can find this example in scene 3: <strong>Example 3 - Run tween from jobsystem</strong></p>
+<p>Creating tweens in the job system is a bit faster than on the main thread.
+It happens because JustTweenIt makes some pre-calculation of the data before add it to the ECS.
+All structural changes happen in <strong>JTweenPlaySequenceCommandsSystem</strong> on the main thread.</p>
+<div class="highlight"><pre><span></span><code><span class="na">[UpdateInGroup(typeof(ExampleSystemsGroup))]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ExampleRunTweenFromJobSystem</span> <span class="p">:</span> <span class="n">SystemBase</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">JTweenBeginSimulationEntityCommandBufferSystem</span> <span class="n">_commandBufferSystem</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">base</span><span class="p">.</span><span class="n">OnCreate</span><span class="p">();</span>
+        <span class="n">_commandBufferSystem</span> <span class="p">=</span> <span class="n">World</span><span class="p">.</span><span class="n">GetExistingSystem</span><span class="p">&lt;</span><span class="n">JTweenBeginSimulationEntityCommandBufferSystem</span><span class="p">&gt;();</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnUpdate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">commandBuffer</span> <span class="p">=</span> <span class="n">_commandBufferSystem</span><span class="p">.</span><span class="n">CreateCommandBuffer</span><span class="p">().</span><span class="n">ToConcurrent</span><span class="p">();</span>
+
+        <span class="n">Entities</span><span class="p">.</span><span class="n">WithAll</span><span class="p">&lt;</span><span class="n">ExampleTweenTarget</span><span class="p">&gt;().</span><span class="n">ForEach</span><span class="p">((</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">,</span> <span class="kt">int</span> <span class="n">entityInQueryIndex</span><span class="p">)</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">moveSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">moveCommandBuffer</span><span class="p">);</span>
+            <span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">moveCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+            <span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">moveCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+            <span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">moveCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+            <span class="n">moveSequence</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">moveCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="m">5</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+            <span class="n">moveSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">PinPong</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+            <span class="n">moveSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">moveCommandBuffer</span><span class="p">);</span>
+
+            <span class="kt">var</span> <span class="n">rotateSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">rotateCommandBuffer</span><span class="p">);</span>
+            <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">rotateCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="m">0.25f</span><span class="p">);</span>
+            <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">rotateCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="m">0.25f</span><span class="p">);</span>
+            <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">rotateCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="m">0.25f</span><span class="p">);</span>
+            <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">rotateCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="m">0.25f</span><span class="p">);</span>
+            <span class="n">rotateSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">Loop</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+            <span class="n">rotateSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">rotateCommandBuffer</span><span class="p">);</span>
+
+            <span class="kt">var</span> <span class="n">scaleSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">scaleCommandBuffer</span><span class="p">);</span>
+            <span class="n">scaleSequence</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">scaleCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(</span><span class="m">0.5f</span><span class="p">,</span><span class="m">0.5f</span><span class="p">,</span><span class="m">0.5f</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+            <span class="n">scaleSequence</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">scaleCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float3</span><span class="p">(-</span><span class="m">0.5f</span><span class="p">,-</span><span class="m">0.5f</span><span class="p">,-</span><span class="m">0.5f</span><span class="p">),</span> <span class="m">1f</span><span class="p">);</span>
+            <span class="n">scaleSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">Loop</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+            <span class="n">scaleSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">scaleCommandBuffer</span><span class="p">);</span>
+
+            <span class="kt">var</span> <span class="n">colorSequence</span> <span class="p">=</span> <span class="n">entity</span><span class="p">.</span><span class="n">AddSequence</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">colorCommandBuffer</span><span class="p">);</span>
+            <span class="n">colorSequence</span><span class="p">.</span><span class="n">BaseColorTo</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">colorCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="m">1f</span> <span class="p">);</span>
+            <span class="n">colorSequence</span><span class="p">.</span><span class="n">BaseColorTo</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">colorCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="m">1f</span> <span class="p">);</span>
+            <span class="n">colorSequence</span><span class="p">.</span><span class="n">BaseColorTo</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">colorCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float4</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="m">1f</span> <span class="p">);</span>
+            <span class="n">colorSequence</span><span class="p">.</span><span class="n">BaseColorTo</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">colorCommandBuffer</span><span class="p">,</span> <span class="k">new</span> <span class="n">float4</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="m">1f</span> <span class="p">);</span>
+            <span class="n">colorSequence</span><span class="p">.</span><span class="n">SetLoop</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="n">JTweenSequenceLoopType</span><span class="p">.</span><span class="n">Loop</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+            <span class="n">colorSequence</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="k">ref</span> <span class="n">colorCommandBuffer</span><span class="p">);</span>
+        <span class="p">}).</span><span class="n">ScheduleParallel</span><span class="p">();</span>
+
+        <span class="n">_commandBufferSystem</span><span class="p">.</span><span class="n">AddJobHandleForProducer</span><span class="p">(</span><span class="n">Dependency</span><span class="p">);</span>
+        <span class="n">Enabled</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span> <span class="c1">//disable test system after running animation</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="process-sequence-callbacks">Process sequence callbacks<a class="headerlink" href="#process-sequence-callbacks" title="Permanent link">&para;</a></h2>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href=".." title="Overview" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../BuiltInAnimations/" title="BuiltIn animations" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                BuiltIn animations
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="../assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
