@@ -29,14 +29,14 @@ public static void Move(this JTweenSequence sequence, EntityCommandBuffer.Concur
 
 ### MoveTo
 
-MoveTo -  moves **Translation** component to **endPosition** in **durationSeconds**
+MoveTo -  moves **Translation** component to **targetPosition** in **durationSeconds**
 
 ![MoveTo](img/MoveTo.png)
 
 Main thread API:
 ```c#
 MoveTo(this JTweenSequence sequence, EntityManager entityManager,  
-  float3 endPosition, float durationSeconds,
+  float3 targetPosition, float durationSeconds,
   GameObjectConversionSystem conversionSystem = null, Component targetComponent = null)
 ```
 
@@ -44,13 +44,15 @@ Jobs API:
 ```c#
 public static void MoveTo(this JTweenSequence sequence, EntityCommandBuffer.Concurrent commandBuffer, int entityInQueryIndex,
   ref DynamicBuffer<JTweenCommandElement> sequenceCommandBuffer,
-  float3 endPosition, float durationSeconds)
+  float3 targetPosition, float durationSeconds)
 ```
 
 ### MoveCurve
 
 MoveCurve - moves **Translation** component by **AnimationCurve** in **durationSeconds**.
-You can specify animation curves for each coordinates separately
+You can specify animation curves for each coordinates separately.
+
+MoveCurve has only Main thread API: due too AnimationCurve is a managed class and can't be passed to the job.
 
 ![MoveCurve](img/MoveCurve.png)
 
@@ -59,13 +61,6 @@ Main thread API:
 public static void MoveCurve(this JTweenSequence sequence, EntityManager entityManager,
     AnimationCurve x, AnimationCurve y, AnimationCurve z, float durationSeconds,
     GameObjectConversionSystem conversionSystem = null, Component targetComponent = null)
-```
-
-Jobs API:
-```c#
-public static void MoveCurve(this JTweenSequence sequence, EntityCommandBuffer commandBuffer,
-    ref DynamicBuffer<JTweenCommandElement> sequenceCommandBuffer,
-    AnimationCurve x, AnimationCurve y, AnimationCurve z, float durationSeconds)
 ```
 
 ## Rotate Tweens
@@ -80,11 +75,11 @@ Rotate - rotates **Rotation** component on **rotationAngle** in **durationSecond
 Main thread API:
 ```c#
 public static void Rotate(this JTweenSequence sequence, EntityManager entityManager, float3 rotationAngle,
-    float duration,
+    float durationSeconds,
     GameObjectConversionSystem conversionSystem = null, Component targetComponent = null)
 
 public static void Rotate(this JTweenSequence sequence, EntityManager entityManager, quaternion rotationAngle,
-            float duration,
+            float durationSeconds,
             GameObjectConversionSystem conversionSystem = null, Component targetComponent = null)
 ```
 
