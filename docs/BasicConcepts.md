@@ -66,7 +66,7 @@ After that you can add animations to the sequence in the Inspector menu.
 In plugin provided examples, scene 1: **Example 1 - Configue tween from authoring components**  shows
 how to configure tweens in the scene.
 
-![Screenshot](img/EdiorInspector.png)
+![EdiorInspector](img/EdiorInspector.png)
 
 
 
