@@ -221,9 +221,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#core" class="md-nav__link">
+    Core
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#move-tweens" class="md-nav__link">
     Move Tweens
   </a>
+  
+    <nav class="md-nav" aria-label="Move Tweens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    Move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moveto" class="md-nav__link">
+    MoveTo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movecurve" class="md-nav__link">
+    MoveCurve
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -231,6 +265,19 @@
   <a href="#rotate-tweens" class="md-nav__link">
     Rotate Tweens
   </a>
+  
+    <nav class="md-nav" aria-label="Rotate Tweens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rotate" class="md-nav__link">
+    Rotate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -312,9 +359,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#core" class="md-nav__link">
+    Core
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#move-tweens" class="md-nav__link">
     Move Tweens
   </a>
+  
+    <nav class="md-nav" aria-label="Move Tweens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    Move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moveto" class="md-nav__link">
+    MoveTo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movecurve" class="md-nav__link">
+    MoveCurve
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -322,6 +403,19 @@
   <a href="#rotate-tweens" class="md-nav__link">
     Rotate Tweens
   </a>
+  
+    <nav class="md-nav" aria-label="Rotate Tweens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rotate" class="md-nav__link">
+    Rotate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -363,8 +457,66 @@
                 
                 
                 <h1 id="builtin-animations">BuiltIn animations<a class="headerlink" href="#builtin-animations" title="Permanent link">&para;</a></h1>
+<h2 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
+<p>JustTweenIt provides two different methods for builtIn animations: for the main thread and scheduled jobs.</p>
+<p>Methods for the main thread have optional parameters <code>GameObjectConversionSystem conversionSystem</code> and <code>Component targetComponent</code>.
+This parameters are used during <a href="https://docs.unity3d.com/Packages/com.unity.entities@0.13/manual/gp_overview.html">conversion stage on ECS</a>.</p>
 <h2 id="move-tweens">Move Tweens<a class="headerlink" href="#move-tweens" title="Permanent link">&para;</a></h2>
+<h3 id="move">Move<a class="headerlink" href="#move" title="Permanent link">&para;</a></h3>
+<p>Move - moves <strong>Translation</strong> component on <strong>moveDelta</strong> in <strong>durationSeconds</strong></p>
+<p><img alt="Move" src="../img/MoveDelta.png" /></p>
+<p>Main thread API:
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Move</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span>
+  <span class="n">float3</span> <span class="n">moveDelta</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">,</span>
+<span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Component</span> <span class="n">targetComponent</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Jobs API:
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Move</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityCommandBuffer</span><span class="p">.</span><span class="n">Concurrent</span> <span class="n">commandBuffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">entityInQueryIndex</span><span class="p">,</span>
+ <span class="k">ref</span> <span class="n">DynamicBuffer</span><span class="p">&lt;</span><span class="n">JTweenCommandElement</span><span class="p">&gt;</span> <span class="n">sequenceCommandBuffer</span><span class="p">,</span>
+ <span class="n">float3</span> <span class="n">moveDelta</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="moveto">MoveTo<a class="headerlink" href="#moveto" title="Permanent link">&para;</a></h3>
+<p>MoveTo -  moves <strong>Translation</strong> component to <strong>endPosition</strong> in <strong>durationSeconds</strong>
+<img alt="MoveTo" src="../img/MoveTo.png" /></p>
+<p>Main thread API:
+<div class="highlight"><pre><span></span><code><span class="n">MoveTo</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span>  
+  <span class="n">float3</span> <span class="n">endPosition</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">,</span>
+  <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Component</span> <span class="n">targetComponent</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Jobs API:
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">MoveTo</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityCommandBuffer</span><span class="p">.</span><span class="n">Concurrent</span> <span class="n">commandBuffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">entityInQueryIndex</span><span class="p">,</span>
+  <span class="k">ref</span> <span class="n">DynamicBuffer</span><span class="p">&lt;</span><span class="n">JTweenCommandElement</span><span class="p">&gt;</span> <span class="n">sequenceCommandBuffer</span><span class="p">,</span>
+  <span class="n">float3</span> <span class="n">endPosition</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="movecurve">MoveCurve<a class="headerlink" href="#movecurve" title="Permanent link">&para;</a></h3>
+<p>MoveCurve - move <strong>Translation</strong> component by <strong>AnimationCurve</strong> in <strong>durationSeconds</strong>.
+You can specify animation curves for each coordinates separately
+<img alt="MoveCurve" src="../img/MoveCurve.png" /></p>
+<p>Main thread API:
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">MoveCurve</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span>
+    <span class="n">AnimationCurve</span> <span class="n">x</span><span class="p">,</span> <span class="n">AnimationCurve</span> <span class="n">y</span><span class="p">,</span> <span class="n">AnimationCurve</span> <span class="n">z</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">,</span>
+    <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Component</span> <span class="n">targetComponent</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Jobs API:
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">MoveCurve</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityCommandBuffer</span> <span class="n">commandBuffer</span><span class="p">,</span>
+    <span class="k">ref</span> <span class="n">DynamicBuffer</span><span class="p">&lt;</span><span class="n">JTweenCommandElement</span><span class="p">&gt;</span> <span class="n">sequenceCommandBuffer</span><span class="p">,</span>
+    <span class="n">AnimationCurve</span> <span class="n">x</span><span class="p">,</span> <span class="n">AnimationCurve</span> <span class="n">y</span><span class="p">,</span> <span class="n">AnimationCurve</span> <span class="n">z</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="rotate-tweens">Rotate Tweens<a class="headerlink" href="#rotate-tweens" title="Permanent link">&para;</a></h2>
+<h3 id="rotate">Rotate<a class="headerlink" href="#rotate" title="Permanent link">&para;</a></h3>
+<p>Rotate - rotates <strong>Rotation</strong> component by <strong>rotationAngle</strong> in <strong>durationSeconds</strong>
+<strong>rotationAngle</strong> in degrees.
+<img alt="RotateDelta" src="../img/RotateDelta.png" /></p>
+<p>Main thread API:
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Rotate</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span> <span class="n">float3</span> <span class="n">rotationAngle</span><span class="p">,</span>
+    <span class="kt">float</span> <span class="n">duration</span><span class="p">,</span>
+    <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Component</span> <span class="n">targetComponent</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Jobs API:
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Rotate</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityCommandBuffer</span><span class="p">.</span><span class="n">Concurrent</span> <span class="n">commandBuffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">entityInQueryIndex</span><span class="p">,</span>
+    <span class="k">ref</span> <span class="n">DynamicBuffer</span><span class="p">&lt;</span><span class="n">JTweenCommandElement</span><span class="p">&gt;</span> <span class="n">sequenceCommandBuffer</span><span class="p">,</span>
+    <span class="n">float3</span> <span class="n">rotationAngle</span><span class="p">,</span> <span class="kt">float</span> <span class="n">duration</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="scale-tweens">Scale Tweens<a class="headerlink" href="#scale-tweens" title="Permanent link">&para;</a></h2>
 <h2 id="shake-tweens">Shake Tweens<a class="headerlink" href="#shake-tweens" title="Permanent link">&para;</a></h2>
 <h2 id="color-tweens">Color Tweens<a class="headerlink" href="#color-tweens" title="Permanent link">&para;</a></h2>
