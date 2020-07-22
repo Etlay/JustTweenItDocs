@@ -10,6 +10,8 @@
       
       
       
+        <meta name="author" content="Aleksey Diudia">
+      
       <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
     
@@ -249,8 +251,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#process-sequence-callbacks" class="md-nav__link">
-    Process sequence callbacks
+  <a href="#process-sequence-callbacks-and-states" class="md-nav__link">
+    Process sequence callbacks and states
   </a>
   
 </li>
@@ -366,8 +368,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#process-sequence-callbacks" class="md-nav__link">
-    Process sequence callbacks
+  <a href="#process-sequence-callbacks-and-states" class="md-nav__link">
+    Process sequence callbacks and states
   </a>
   
 </li>
@@ -550,7 +552,40 @@ All structural changes happen in <strong>JTweenPlaySequenceCommandsSystem</stron
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 id="process-sequence-callbacks">Process sequence callbacks<a class="headerlink" href="#process-sequence-callbacks" title="Permanent link">&para;</a></h2>
+<h2 id="process-sequence-callbacks-and-states">Process sequence callbacks and states<a class="headerlink" href="#process-sequence-callbacks-and-states" title="Permanent link">&para;</a></h2>
+<p>You can process callback from sequence by working with tags-components.
+Scene 6: <strong>Example 6 - Swapn from prefab and process callbacks</strong> shows how to process finishing sequence:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// process finish sequence callback. Burst disabled only for Debug.Log. You can safely process callbacks in jobs</span>
+<span class="n">Entities</span><span class="p">.</span><span class="n">WithoutBurst</span><span class="p">().</span><span class="n">WithAll</span><span class="p">&lt;</span><span class="n">JTweenFinishedSequence</span><span class="p">&gt;().</span><span class="n">ForEach</span><span class="p">((</span><span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">)</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;Sequence {sequence} finished!&quot;</span><span class="p">);</span>
+<span class="p">}).</span><span class="n">Run</span><span class="p">();</span>
+</code></pre></div>
+
+<p>JustTweenIt supports such states for sequences:</p>
+<ul>
+<li>JTweenPlayingSequence</li>
+<li>JTweenFinishedSequence</li>
+<li>JTweenPausedSequence</li>
+<li>JTweenNotStartedSequence</li>
+</ul>
+<p>Also you can process additional states in custom animations, such as:</p>
+<ul>
+<li>JTweenInitAnimation</li>
+<li>JTweenPlayingAnimation</li>
+<li>JTweenFinishedAnimation</li>
+<li>JTweenPausedAnimation</li>
+<li>JTweenAnimationPlayBackward</li>
+<li>JTweenAnimationPlayForward</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>For processing <strong>JTweenInitAnimation</strong> state you should place your system into <strong>JTweenInitAnimationsSystemGroup</strong>;</li>
+<li>For processing <strong>JTweenPlayingAnimation</strong> state you should place your system into <strong>JTweenUpdateAnimationsSystemGroup</strong>;</li>
+<li>For processing <strong>JTweenFinishedAnimation</strong> state you should place your system into <strong>JTweenFinishAnimationSystemGroup</strong>;</li>
+</ul>
+</div>
                 
               
               
