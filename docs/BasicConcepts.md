@@ -178,4 +178,35 @@ public class ExampleRunTweenFromJobSystem : SystemBase
 }
 ```
 
-## Process sequence callbacks
+## Process sequence callbacks and states
+You can process callback from sequence by working with tags-components.
+Scene 6: **Example 6 - Swapn from prefab and process callbacks** shows how to process finishing sequence:
+
+```c#
+// process finish sequence callback. Burst disabled only for Debug.Log. You can safely process callbacks in jobs
+Entities.WithoutBurst().WithAll<JTweenFinishedSequence>().ForEach((JTweenSequence sequence) =>
+{
+	Debug.Log($"Sequence {sequence} finished!");
+}).Run();
+```
+
+JustTweenIt supports such states for sequences:
+
+  - JTweenPlayingSequence
+  - JTweenFinishedSequence
+  - JTweenPausedSequence
+  - JTweenNotStartedSequence
+
+Also you can process additional states in custom animations, such as:
+
+  - JTweenInitAnimation
+  - JTweenPlayingAnimation
+  - JTweenFinishedAnimation
+  - JTweenPausedAnimation
+  - JTweenAnimationPlayBackward
+  - JTweenAnimationPlayForward
+
+!!! warning
+    - For processing **JTweenInitAnimation** state you should place your system into **JTweenInitAnimationsSystemGroup**;
+    - For processing **JTweenPlayingAnimation** state you should place your system into **JTweenUpdateAnimationsSystemGroup**;
+    - For processing **JTweenFinishedAnimation** state you should place your system into **JTweenFinishAnimationSystemGroup**;
