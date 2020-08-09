@@ -43,6 +43,10 @@
     
     
       
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-174990548-1","etlay.github.io/JustTweenItDocs/"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -624,31 +628,27 @@ This parameters are used during <a href="https://docs.unity3d.com/Packages/com.u
  <span class="n">float3</span> <span class="n">moveDelta</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">)</span>
 </code></pre></div></p>
 <h3 id="moveto">MoveTo<a class="headerlink" href="#moveto" title="Permanent link">&para;</a></h3>
-<p>MoveTo -  moves <strong>Translation</strong> component to <strong>endPosition</strong> in <strong>durationSeconds</strong></p>
+<p>MoveTo -  moves <strong>Translation</strong> component to <strong>targetPosition</strong> in <strong>durationSeconds</strong></p>
 <p><img alt="MoveTo" src="../img/MoveTo.png" /></p>
 <p>Main thread API:
 <div class="highlight"><pre><span></span><code><span class="n">MoveTo</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span>  
-  <span class="n">float3</span> <span class="n">endPosition</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">,</span>
+  <span class="n">float3</span> <span class="n">targetPosition</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">,</span>
   <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Component</span> <span class="n">targetComponent</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
 </code></pre></div></p>
 <p>Jobs API:
 <div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">MoveTo</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityCommandBuffer</span><span class="p">.</span><span class="n">Concurrent</span> <span class="n">commandBuffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">entityInQueryIndex</span><span class="p">,</span>
   <span class="k">ref</span> <span class="n">DynamicBuffer</span><span class="p">&lt;</span><span class="n">JTweenCommandElement</span><span class="p">&gt;</span> <span class="n">sequenceCommandBuffer</span><span class="p">,</span>
-  <span class="n">float3</span> <span class="n">endPosition</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">)</span>
+  <span class="n">float3</span> <span class="n">targetPosition</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">)</span>
 </code></pre></div></p>
 <h3 id="movecurve">MoveCurve<a class="headerlink" href="#movecurve" title="Permanent link">&para;</a></h3>
 <p>MoveCurve - moves <strong>Translation</strong> component by <strong>AnimationCurve</strong> in <strong>durationSeconds</strong>.
-You can specify animation curves for each coordinates separately</p>
+You can specify animation curves for each coordinates separately.</p>
+<p>MoveCurve has only Main thread API: due too AnimationCurve is a managed class and can't be passed to the job.</p>
 <p><img alt="MoveCurve" src="../img/MoveCurve.png" /></p>
 <p>Main thread API:
 <div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">MoveCurve</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span>
     <span class="n">AnimationCurve</span> <span class="n">x</span><span class="p">,</span> <span class="n">AnimationCurve</span> <span class="n">y</span><span class="p">,</span> <span class="n">AnimationCurve</span> <span class="n">z</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">,</span>
     <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Component</span> <span class="n">targetComponent</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
-</code></pre></div></p>
-<p>Jobs API:
-<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">MoveCurve</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityCommandBuffer</span> <span class="n">commandBuffer</span><span class="p">,</span>
-    <span class="k">ref</span> <span class="n">DynamicBuffer</span><span class="p">&lt;</span><span class="n">JTweenCommandElement</span><span class="p">&gt;</span> <span class="n">sequenceCommandBuffer</span><span class="p">,</span>
-    <span class="n">AnimationCurve</span> <span class="n">x</span><span class="p">,</span> <span class="n">AnimationCurve</span> <span class="n">y</span><span class="p">,</span> <span class="n">AnimationCurve</span> <span class="n">z</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">)</span>
 </code></pre></div></p>
 <h2 id="rotate-tweens">Rotate Tweens<a class="headerlink" href="#rotate-tweens" title="Permanent link">&para;</a></h2>
 <p>For rotation tweens you can set rotation angle in two ways: by euler angles in degrees or quaternions.</p>
@@ -658,11 +658,11 @@ You can specify animation curves for each coordinates separately</p>
 <p><img alt="RotateDelta" src="../img/RotateDelta.png" /></p>
 <p>Main thread API:
 <div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Rotate</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span> <span class="n">float3</span> <span class="n">rotationAngle</span><span class="p">,</span>
-    <span class="kt">float</span> <span class="n">duration</span><span class="p">,</span>
+    <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">,</span>
     <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Component</span> <span class="n">targetComponent</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
 
 <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Rotate</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span> <span class="n">quaternion</span> <span class="n">rotationAngle</span><span class="p">,</span>
-            <span class="kt">float</span> <span class="n">duration</span><span class="p">,</span>
+            <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">,</span>
             <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Component</span> <span class="n">targetComponent</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
 </code></pre></div></p>
 <p>Jobs API:

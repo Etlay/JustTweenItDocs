@@ -43,6 +43,10 @@
     
     
       
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-174990548-1","etlay.github.io/JustTweenItDocs/"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -257,6 +261,125 @@
                 
                 
                 <h1 id="create-user-custom-animation">Create user custom animation<a class="headerlink" href="#create-user-custom-animation" title="Permanent link">&para;</a></h1>
+<p>JustTweenIt design to support user custom animation written on pure ECS stile.
+It provides code structure to integrate user systems into JustTweenIt sequence systems.</p>
+<p>You can find all example code in the "Example 7 - User custom animation" scene provided by JustTweenIt plugin.</p>
+<p>To create custom animation you should add several classes to your project.</p>
+<p>First is the actual data component which will be animated by JustTweenIt:
+It can be any types natively supported by Unity ECS.</p>
+<div class="highlight"><pre><span></span><code><span class="na">[GenerateAuthoringComponent]</span>
+<span class="k">public</span> <span class="k">struct</span> <span class="nc">CustomAnimatedData</span> <span class="p">:</span> <span class="n">IComponentData</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="kt">float</span> <span class="n">AnimatedFloat</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Also you should add your custom animation component. It can store animation settings if needed:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">struct</span> <span class="nc">CustomAnimationSettings</span> <span class="p">:</span> <span class="n">IComponentData</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="kt">float</span> <span class="n">Delta</span><span class="p">;</span>
+  <span class="k">public</span> <span class="kt">float</span> <span class="n">StartValue</span><span class="p">;</span>
+  <span class="k">public</span> <span class="kt">float</span> <span class="n">EndValue</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>For configuring animation from the editor inspector you may want to add Authoring component
+to you AnimationSettings component:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">class</span> <span class="nc">CustomAnimationSettingsAuthoring</span> <span class="p">:</span> <span class="n">JTweenAnimationAuthoring</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">AnimationName</span> <span class="p">=&gt;</span> <span class="s">&quot;Example 7 User Custom Animation&quot;</span><span class="p">;</span>
+
+  <span class="k">public</span> <span class="kt">float</span> <span class="n">delta</span><span class="p">;</span>
+
+  <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ConvertToEntity</span><span class="p">(</span><span class="n">EntityManager</span> <span class="n">dstManager</span><span class="p">,</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">GameObjectConversionSystem</span> <span class="n">conversionSystem</span><span class="p">,</span>
+    <span class="n">Component</span> <span class="n">targetComponent</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">sequence</span><span class="p">.</span><span class="n">AddUserCustomAnimation</span><span class="p">(</span><span class="n">dstManager</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">conversionSystem</span><span class="p">,</span> <span class="n">targetComponent</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>By adding this class you adds inspector data to JustTweenSequenceAuthoring.  If you don't need to animate your data from the inspector
+you can skip this class</p>
+<p><img alt="CustomUserAnimation" src="../img/CustomUserAnimation.png" /></p>
+<p>To create animation, you should write several methods:</p>
+<p>Method, which is creates animation in the main thread, it also uses during conversion stage by CustomAnimationSettingsAuthoring class.</p>
+<div class="highlight"><pre><span></span><code>public static void AddUserCustomAnimation(this JTweenSequence sequence, EntityManager entityManager,
+    float delta, float durationSeconds,
+    GameObjectConversionSystem conversionSystem = null, Component targetComponent = null)
+{
+    var sequenceElementEntity = JTweenHelper.CreateEntity(entityManager, conversionSystem, targetComponent);
+    JTweenHelper.AddCommonAnimationComponents(sequence, entityManager, durationSeconds, sequenceElementEntity,
+        UserCustomAnimationType);
+    entityManager.AddComponent&lt;JTweenMoveTo&gt;(sequenceElementEntity);
+
+    CustomAnimationSettings tweenMoveDelta = new CustomAnimationSettings
+    {
+        Delta = delta
+    };
+    entityManager.AddComponentData(sequenceElementEntity, tweenMoveDelta);
+}
+</code></pre></div>
+
+<p>This method adds CustomAnimationSettings to the target sequence.  </p>
+<p>For running animation from the jobs you should add two additional methods and one component:</p>
+<p>CreateCommand component stores all the data needed to the animation. All commands executes during <strong>JTweenPlaySequenceCommandsSystem</strong> on the main thread</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">struct</span> <span class="nc">CreateCommand</span> <span class="p">:</span> <span class="n">IComponentData</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">JTweenSequence</span> <span class="n">JTweenSequence</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">Duration</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">CustomAnimationSettings</span> <span class="n">CustomAnimationSettings</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This method adds CreateCommand to the sequence during the job
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">AddUserCustomAnimation</span><span class="p">(</span><span class="k">this</span> <span class="n">JTweenSequence</span> <span class="n">sequence</span><span class="p">,</span>
+    <span class="n">EntityCommandBuffer</span><span class="p">.</span><span class="n">ParallelWriter</span> <span class="n">commandBuffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">entityInQueryIndex</span><span class="p">,</span>
+    <span class="k">ref</span> <span class="n">DynamicBuffer</span><span class="p">&lt;</span><span class="n">JTweenCommandElement</span><span class="p">&gt;</span> <span class="n">sequenceCommandBuffer</span><span class="p">,</span>
+    <span class="kt">float</span> <span class="n">delta</span><span class="p">,</span> <span class="kt">float</span> <span class="n">durationSeconds</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CustomAnimationSettings</span> <span class="n">customAnimationSettings</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CustomAnimationSettings</span>
+    <span class="p">{</span>
+        <span class="n">Delta</span> <span class="p">=</span> <span class="n">delta</span>
+    <span class="p">};</span>
+
+    <span class="c1">// in the job, don&#39;t create animation itself, but create command, which will be executed later</span>
+    <span class="c1">// in the JTweenPlaySequenceCommandsSystem  </span>
+    <span class="n">CustomAnimationSettings</span><span class="p">.</span><span class="n">CreateCommand</span> <span class="n">createCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CustomAnimationSettings</span><span class="p">.</span><span class="n">CreateCommand</span>
+    <span class="p">{</span>
+        <span class="n">CustomAnimationSettings</span> <span class="p">=</span> <span class="n">customAnimationSettings</span><span class="p">,</span>
+        <span class="n">Duration</span> <span class="p">=</span> <span class="n">durationSeconds</span><span class="p">,</span>
+        <span class="n">JTweenSequence</span> <span class="p">=</span> <span class="n">sequence</span>
+    <span class="p">};</span>
+
+    <span class="kt">var</span> <span class="n">e</span> <span class="p">=</span> <span class="n">commandBuffer</span><span class="p">.</span><span class="n">CreateEntity</span><span class="p">(</span><span class="n">entityInQueryIndex</span><span class="p">);</span>
+
+    <span class="n">JTweenCommandElement</span> <span class="n">commandElement</span> <span class="p">=</span> <span class="k">new</span> <span class="n">JTweenCommandElement</span>
+    <span class="p">{</span>
+        <span class="n">CommandEntity</span> <span class="p">=</span> <span class="n">e</span><span class="p">,</span>
+        <span class="n">CommandType</span> <span class="p">=</span> <span class="n">UserCustomAnimationType</span>
+    <span class="p">};</span>
+    <span class="n">sequenceCommandBuffer</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">commandElement</span><span class="p">);</span>
+
+    <span class="n">commandBuffer</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">JTweenMoveDelta</span><span class="p">.</span><span class="n">CreateCommand</span><span class="p">&gt;(</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+    <span class="n">commandBuffer</span><span class="p">.</span><span class="n">SetComponent</span><span class="p">(</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">createCommand</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">sequenceCommandBuffer</span><span class="p">.</span><span class="n">Length</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">commandBuffer</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">JTweenNeedPlayCreateCommand</span><span class="p">&gt;(</span><span class="n">entityInQueryIndex</span><span class="p">,</span> <span class="n">sequence</span><span class="p">.</span><span class="n">SequenceEntity</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>This method runs by <strong><em>JTweenPlaySequenceCommandsSystem</em></strong> on the main thread during executing CreateCommand
+<div class="highlight"><pre><span></span><code><span class="k">internal</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">ExecuteUserCustomAnimationCommand</span><span class="p">(</span><span class="n">EntityManager</span> <span class="n">entityManager</span><span class="p">,</span>
+    <span class="n">JTweenCommandElement</span> <span class="n">command</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">createCommand</span> <span class="p">=</span>
+        <span class="n">entityManager</span><span class="p">.</span><span class="n">GetComponentData</span><span class="p">&lt;</span><span class="n">CustomAnimationSettings</span><span class="p">.</span><span class="n">CreateCommand</span><span class="p">&gt;(</span><span class="n">command</span><span class="p">.</span><span class="n">CommandEntity</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">data</span> <span class="p">=</span> <span class="n">createCommand</span><span class="p">.</span><span class="n">CustomAnimationSettings</span><span class="p">;</span>
+    <span class="n">createCommand</span><span class="p">.</span><span class="n">JTweenSequence</span><span class="p">.</span><span class="n">AddUserCustomAnimation</span><span class="p">(</span><span class="n">entityManager</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">Delta</span><span class="p">,</span> <span class="n">createCommand</span><span class="p">.</span><span class="n">Duration</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
                 
               
               
