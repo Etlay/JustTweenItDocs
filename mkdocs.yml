@@ -13,7 +13,9 @@ theme:
     scheme: slate
     primary: amber
     accent: indigo
-google_analytics: ['UA-174990548-1', 'etlay.github.io/JustTweenItDocs/']
+google_analytics:
+  - UA-174990548-1
+  - auto
 markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.superfences
