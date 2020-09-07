@@ -9,7 +9,7 @@ This parameters are used during [conversion stage on ECS](https://docs.unity3d.c
 ## Move Tweens
 
 ### Move
-Move - moves **Translation** component on **moveDelta** in **durationSeconds**
+Move - moves **`Translation`** component on **`moveDelta`** in **`durationSeconds`**
 
 ![Move](img/MoveDelta.png)
 
@@ -29,7 +29,7 @@ public static void Move(this JTweenSequence sequence, EntityCommandBuffer.Concur
 
 ### MoveTo
 
-MoveTo -  moves **Translation** component to **targetPosition** in **durationSeconds**
+MoveTo -  moves **`Translation`** component to **`targetPosition`** in **`durationSeconds`**
 
 ![MoveTo](img/MoveTo.png)
 
@@ -49,7 +49,7 @@ public static void MoveTo(this JTweenSequence sequence, EntityCommandBuffer.Conc
 
 ### MoveCurve
 
-MoveCurve - moves **Translation** component by **AnimationCurve** in **durationSeconds**.
+MoveCurve - moves **`Translation`** component by **`AnimationCurve`** in **`durationSeconds`**.
 You can specify animation curves for each coordinates separately.
 
 MoveCurve has only Main thread API: due too AnimationCurve is a managed class and can't be passed to the job.
@@ -67,8 +67,8 @@ public static void MoveCurve(this JTweenSequence sequence, EntityManager entityM
 
 For rotation tweens you can set rotation angle in two ways: by euler angles in degrees or quaternions.
 ### Rotate
-Rotate - rotates **Rotation** component on **rotationAngle** in **durationSeconds**
-**rotationAngle** in degrees.
+Rotate - rotates **Rotation** component on **`rotationAngle`** in **`durationSeconds`**
+**`rotationAngle`** in degrees.
 
 ![RotateDelta](img/RotateDelta.png)
 
@@ -95,8 +95,8 @@ public static void Rotate(this JTweenSequence sequence, EntityCommandBuffer.Conc
 ```
 
 ### RotateTo
-RotateTo - rotates **Rotation** component to **rotationAngle** in **durationSeconds**
-**rotationAngle** in degrees.
+RotateTo - rotates **`Rotation`** component to **`rotationAngle`** in **`durationSeconds`**
+**`rotationAngle`** in degrees.
 
 ![RotateTo](img/RotateTo.png)
 
@@ -125,7 +125,7 @@ public static void RotateTo(this JTweenSequence sequence, EntityManager entityMa
 ## Scale Tweens
 
 ### Scale
-Scale - scales **NonUniformScale** component by **scaleDelta** in **durationSeconds**.
+Scale - scales **`NonUniformScale`** component by **`scaleDelta`** in **`durationSeconds`**.
 
 ![ScaleDelta](img/ScaleDelta.png)
 
@@ -144,7 +144,7 @@ public static void Scale(this JTweenSequence sequence, EntityCommandBuffer.Concu
 ```
 
 ### ScaleTo
-ScaleTo - scales **NonUniformScale** component to **targetScale** in **durationSeconds**.
+ScaleTo - scales **`NonUniformScale`** component to **`targetScale`** in **`durationSeconds`**.
 
 ![ScaleTo](img/ScaleTo.png)
 
@@ -166,7 +166,7 @@ public static void ScaleTo(this JTweenSequence sequence, EntityCommandBuffer.Con
 Shake tweens use [snoise](https://docs.unity3d.com/Packages/com.unity.mathematics@1.1/api/Unity.Mathematics.noise.html?q=snoise#Unity_Mathematics_noise_snoise_Unity_Mathematics_float2_) to implementation of randomization.
 
 ### RandomShakePosition
-RandomShakePosition - shakes **Translation** component in **durationSeconds** with **strength** and **frequency**
+RandomShakePosition - shakes **`Translation`** component in **`durationSeconds`** with **`strength`** and **`frequency`**
 
 - `strength` - The shake max distance relative to start point. You can specify different strength for each axis;
 - `frequency` - specify how fast target change position.
@@ -188,7 +188,7 @@ public static void RandomShakePosition(this JTweenSequence sequence, EntityComma
 ```
 
 ### RandomShakeRotation
-RandomShakeRotation - shakes **Rotation** component in **durationSeconds** with **strength** and **frequency**
+RandomShakeRotation - shakes **`Rotation`** component in **`durationSeconds`** with **`strength`** and **`frequency`**
 
 - `strength` - The shake max angle, in degrees, relative to start angle. You can specify different strength for each axis;
 - `frequency` - specify how fast target change angle.
@@ -210,14 +210,14 @@ public static void RandomShakeRotation(this JTweenSequence sequence, EntityComma
 ```
 
 ### RandomShakeScale
-RandomShakeScale - shakes **NonUniformScale** component in **durationSeconds** with **strength** and **frequency**
+RandomShakeScale - shakes **`NonUniformScale`** component in **`durationSeconds`** with **`strength`** and **`frequency`**
 
 - `strength` - The shake max scale relative to start scale. You can specify different strength for each axis;
 - `frequency` - specify how fast target change scale.
 - `minScale` - if set, clamps bottom shake scale to this value.
 - `maxScale` - if set, clamps upper shake scale to this value.
 
-**minScale** and **maxScale** can be used to prevent scales to negative values. It is convenient if object default scale is near 1
+**`minScale`** and **`maxScale`** can be used to prevent scales to negative values. It is convenient if object default scale is near 1
 and scale strength is bigger than 1;
 
 ![ShakeScale](img/ShakeScale.png)
@@ -241,7 +241,7 @@ public static void RandomShakeScale(this JTweenSequence sequence, EntityCommandB
 ## Color Tweens
 
 ### BaseColorTo
-BaseColorTo - lerp material **_BaseColor** property in **durationSeconds** to **targetColor**
+BaseColorTo - lerp material **`_BaseColor`** property in **`durationSeconds`** to **`targetColor`**
 
 ![ColorTo](img/ColorTo.png)
 
@@ -259,7 +259,7 @@ public static void BaseColorTo(this JTweenSequence sequence, EntityCommandBuffer
 ```
 
 ### BaseColorGradient
-BaseColorGradient - lerp material **_BaseColor** property in **durationSeconds** by **gradient** value
+BaseColorGradient - lerp material **`_BaseColor`** property in **`durationSeconds`** by **`gradient`** value
 
 ![ColorGradient](img/ColorGradient.png)
 

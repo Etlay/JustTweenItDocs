@@ -1,9 +1,9 @@
 # Create user custom animation
 
-JustTweenIt design to support user custom animation written on pure ECS stile.
-It provides code structure to integrate user systems into JustTweenIt sequence systems.
+JustTweenIt design to support user custom animation written in pure ECS stile.
+It provides code structure to integrate user code into JustTweenIt sequence systems.
 
-You can find all example code in the "Example 7 - User custom animation" scene provided by JustTweenIt plugin.
+You can find all example code in the **"Example 7 - User custom animation"** folder provided by JustTweenIt plugin.
 
 
 To create custom animation you should add several classes to your project.
@@ -48,7 +48,7 @@ public class CustomAnimationSettingsAuthoring : JTweenAnimationAuthoring
 }
 ```
 
-By adding this class you adds inspector data to JustTweenSequenceAuthoring.  If you don't need to animate your data from the inspector
+By adding this class you adds inspector data to **`JustTweenSequenceAuthoring`**.  If you don't need to animate your data from the inspector
 you can skip this class
 
 ![CustomUserAnimation](img/CustomUserAnimation.png)
@@ -56,9 +56,9 @@ you can skip this class
 
 To create animation, you should write several methods:
 
-Method, which is creates animation in the main thread, it also uses during conversion stage by CustomAnimationSettingsAuthoring class.
+Method for creating animation in the main thread, it also is used during conversion stage by CustomAnimationSettingsAuthoring class.
 
-```
+```c#
 public static void AddUserCustomAnimation(this JTweenSequence sequence, EntityManager entityManager,
 	float delta, float durationSeconds,
 	GameObjectConversionSystem conversionSystem = null, Component targetComponent = null)
@@ -79,20 +79,9 @@ public static void AddUserCustomAnimation(this JTweenSequence sequence, EntityMa
 This method adds CustomAnimationSettings to the target sequence.  
 
 
-For running animation from the jobs you should add two additional methods and one component:
+For running animation from the jobs you should add two additional methods:
 
-CreateCommand component stores all the data needed to the animation. All commands executes during **JTweenPlaySequenceCommandsSystem** on the main thread
-
-```c#
-public struct CreateCommand : IComponentData
-{
-	public JTweenSequence JTweenSequence;
-	public float Duration;
-	public CustomAnimationSettings CustomAnimationSettings;
-}
-```
-
-This method adds CreateCommand to the sequence during the job
+This method adds command data to the sequence during the job
 ```c#
 public static void AddUserCustomAnimation(this JTweenSequence sequence,
 	EntityCommandBuffer.ParallelWriter commandBuffer, int entityInQueryIndex,
@@ -104,42 +93,31 @@ public static void AddUserCustomAnimation(this JTweenSequence sequence,
 		Delta = delta
 	};
 
-	// in the job, don't create animation itself, but create command, which will be executed later
-	// in the JTweenPlaySequenceCommandsSystem  
-	CustomAnimationSettings.CreateCommand createCommand = new CustomAnimationSettings.CreateCommand
-	{
-		CustomAnimationSettings = customAnimationSettings,
-		Duration = durationSeconds,
-		JTweenSequence = sequence
-	};
-
-	var e = commandBuffer.CreateEntity(entityInQueryIndex);
-
-	JTweenCommandElement commandElement = new JTweenCommandElement
-	{
-		CommandEntity = e,
-		CommandType = UserCustomAnimationType
-	};
-	sequenceCommandBuffer.Add(commandElement);
-
-	commandBuffer.AddComponent<JTweenMoveDelta.CreateCommand>(entityInQueryIndex, e);
-	commandBuffer.SetComponent(entityInQueryIndex, e, createCommand);
-
-	if (sequenceCommandBuffer.Length == 1)
-	{
-		commandBuffer.AddComponent<JTweenNeedPlayCreateCommand>(entityInQueryIndex, sequence.SequenceEntity);
-	}
+	JTweenHelper.AddNewCommand(sequence, commandBuffer, entityInQueryIndex,
+		ref sequenceCommandBuffer, UserCustomAnimationType, customAnimationSettings, durationSeconds);
 }
 ```
 
-This method runs by ***JTweenPlaySequenceCommandsSystem*** on the main thread during executing CreateCommand
+This method runs by **`JTweenPlaySequenceCommandsSystem`** on the main thread and executes all player commands added in the jobs.
+**`JTweenJobCommand`** component stores all the data needed to the animation.
 ```c#
 internal static void ExecuteUserCustomAnimationCommand(EntityManager entityManager,
 	JTweenCommandElement command)
 {
-	var createCommand =
-		entityManager.GetComponentData<CustomAnimationSettings.CreateCommand>(command.CommandEntity);
-	var data = createCommand.CustomAnimationSettings;
+  var createCommand =
+		entityManager.GetComponentData<JTweenJobCommand<CustomAnimationSettings>>(command.CommandEntity);
+	var data = createCommand.ComponentData;
 	createCommand.JTweenSequence.AddUserCustomAnimation(entityManager, data.Delta, createCommand.Duration);
+}
+```
+
+Execute method must be registered **`JTweenPlaySequenceCommandsSystem`** before using custom animation.
+Usually it can be done in the **`OnCreate`** method of the Init or Update system:
+
+```c#
+protected override void OnCreate()
+{
+  var commandSystem = World.GetExistingSystem<JTweenPlaySequenceCommandsSystem>();
+  commandSystem.RegisterCommand(UserCustomAnimationHelper.UserCustomAnimationType, UserCustomAnimationHelper.ExecuteUserCustomAnimationCommand);
 }
 ```

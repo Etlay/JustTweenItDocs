@@ -52,15 +52,15 @@ In package you can find animations for:
 ##JTween System Groups
 JTween providers serveral system groups to user custom animations, such as:
 
-  - **JTweenSystemGroup** - is a main group of the JustTweenIt plugin. All systems and system groups executed in this system group.
+  - **`JTweenSystemGroup`** - is a main group of the JustTweenIt plugin. All systems and system groups executed in this system group.
   This system group executes in the Unity default SimulationSystemGroup;
-  - **JTweenInitAnimationsSystemGroup** - this groups contains systems for initialization animations before playing such as caching previous object position or randomizing shake.
-  - **JTweenUpdateAnimationsSystemGroup** - this group contains systems with logic for updating animations, such as moving and rotation objects.
-  - **JTweenFinishAnimationSystemGroup** - in this group can be made additional logic after finishing animation and before starting next animation in sequence.
+  - **`JTweenInitAnimationsSystemGroup`** - this groups contains systems for initialization animations before playing such as caching previous object position or randomizing shake.
+  - **`JTweenUpdateAnimationsSystemGroup`** - this group contains systems with logic for updating animations, such as moving and rotation objects.
+  - **`JTweenFinishAnimationSystemGroup`** - in this group can be made additional logic after finishing animation and before starting next animation in sequence.
 
 ## Configure Tween In the Editor
 The easiest way way to create tween is to setup it in the Inspector.
-To do it, you should add **JTweenSequenceAuthoring** component on Game Object.
+To do it, you should add **`JTweenSequenceAuthoring`** component on Game Object.
 After that you can add animations to the sequence in the Inspector menu.
 
 In plugin provided examples, scene 1: **Example 1 - Configue tween from authoring components**  shows
@@ -121,7 +121,7 @@ You can find this example in scene 3: **Example 3 - Run tween from jobsystem**
 
 Creating tweens in the job system is a bit faster than on the main thread.
 It happens because JustTweenIt makes some pre-calculation of the data before add it to the ECS.
-All structural changes happen in **JTweenPlaySequenceCommandsSystem** on the main thread.
+All structural changes happen in **`JTweenPlaySequenceCommandsSystem`** on the main thread.
 
 ``` c#
 [UpdateInGroup(typeof(ExampleSystemsGroup))]
@@ -207,6 +207,6 @@ Also you can process additional states in custom animations, such as:
   - JTweenAnimationPlayForward
 
 !!! warning
-    - For processing **JTweenInitAnimation** state you should place your system into **JTweenInitAnimationsSystemGroup**;
-    - For processing **JTweenPlayingAnimation** state you should place your system into **JTweenUpdateAnimationsSystemGroup**;
-    - For processing **JTweenFinishedAnimation** state you should place your system into **JTweenFinishAnimationSystemGroup**;
+    - For processing **`JTweenInitAnimation`** state you should place your system into **`JTweenInitAnimationsSystemGroup`**;
+    - For processing **`JTweenPlayingAnimation`** state you should place your system into **`JTweenUpdateAnimationsSystemGroup`**;
+    - For processing **`JTweenFinishedAnimation`** state you should place your system into **`JTweenFinishAnimationSystemGroup`**;
